@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Stats{% endblock %}
+{% block content %}
+{%if error%}
+<p style="color:red">{{error}}
+{%endif%}
+<h4 class="stats-h4">Shape:</h4><p>{{ stats.shape.0 }} rows × {{ stats.shape.1 }} columns</p>
+
+<h4 class="stats-h4">Column Names:</h4>
+<ul>
+    {% for col in stats.columns %}
+      <li class="stats-li">{{ col }}</li>
+    {% endfor %}
+  </ul>
+<h4 class="stats-h4">Data types:</h4>
+  <ul>
+    {% for m,n in stats.data.items %}
+      <li class="stats-li">{{m|safe}} : {{n}}</li>
+    {% endfor %}
+  </ul>
+<h4 class="stats-h4">Missing:</h4>
+  <ul>
+    {% for key,value in stats.missing.items %}
+      <li class="stats-li">{{key|safe}} : {{value}}</li>
+    {% endfor %}
+  </ul>
+<h4 class="stats-h4">Total missing: {{ stats.total_missing}}<h4>
+<h4 class="stats-h4">Describe:</h4>
+    <div class=table-container>{{ stats.describe|safe }}</div>
+{%endblock%}

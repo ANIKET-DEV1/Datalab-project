@@ -1,0 +1,24 @@
+
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Preview{% endblock %}
+{% block content %}
+
+<h2>Preview Uploaded Dataset</h2>
+
+{% if table %}
+<h4 class="preview-h4">-20 rows-<h4>
+    <div class="table-container">
+        {{ table|safe }}
+    </div>
+{% else %}
+    <p>No data available to preview. Please <a href="{% url 'upload_csv' %}">upload a CSV</a>.</p>
+{% endif %}
+
+{%if messages%}
+  {%for m in messages%}
+     <p class="upload-message">{{m }}</p>
+{% endfor %}
+    {% endif %}
+{% endblock %}

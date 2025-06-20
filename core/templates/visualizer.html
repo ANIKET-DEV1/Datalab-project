@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Visualize{% endblock %}
+{% block content %}
+<form method="post" class="upload-form">
+    {% csrf_token %}
+    <h2 class="upload-h2-2">Generate Chart</h2>
+    <div class=line></div>
+    <label class="vis-l">X-Axis:</label>
+    <select name="x_column" class="vis-s" required>
+        {% for col in columns %}
+            <option value="{{ col }}">{{ col }}</option>
+        {% endfor %}
+    </select>
+
+    <label class="vis-l" >Y-Axis (optional for hist):</label>
+    <select name="y_column" class="vis-s">
+        <option value="">None</option>
+        {% for col in columns %}
+            <option value="{{ col }}">{{ col }}</option>
+        {% endfor %}
+    </select>
+
+    <label class="vis-l" >Chart Type:</label>
+    <select name="chart_type" class="vis-s" required>
+        <option value="line">Line</option>
+        <option value="bar">Bar</option>
+        <option value="scatter">Scatter</option>
+        <option value="hist">Histogram</option>
+        <option value="box">Box Plot</option>
+    </select>
+
+    <button type="submit">Generate</button>
+</form>
+{% if chart_path %}
+<div class=img-container>
+   <h2>Result:<h2>
+  <img src="{% static chart_path %}" alt="Chart" class="vis-img">
+   </div>
+  {% endif %}
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
+{% endblock %}

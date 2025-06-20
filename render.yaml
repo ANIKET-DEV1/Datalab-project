@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: Datalab
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn datalab.wsgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: datalab.settings
+      - key: SECRET_KEY
+        value: django-insecure-g6-4b1gdrde=8gi61=2mlbz1q=&x1ulwdlhn6=7y@$oac$(wt_
+      - key: DEBUG
+        value: False

@@ -1,0 +1,42 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataLab | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v-126">
+</head>
+<body>
+    <h2 class="upload-h2-2">DataLab.</h2>
+    <h2 class="upload-h2">Welcome to Aniket creation!</h2>
+<form method="POST" enctype="multipart/form-data" class="login-form">
+    {% csrf_token %}
+    <h2 class="upload-h2-2">Login.</h2>
+    <div class="line"></div>
+
+          <div class="input-group">
+          <label for="user">Username:</label>
+          <input type="text" id="email" name="username" required >
+        </div>
+        
+       <div class="input-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password"  required >
+        </div>
+        {% if messages%}
+        {%for m in messages%}
+        <p id="error">{{m}}</p>
+        {% endfor %}
+        {%endif%}
+        <button type="submit" class="btn">login</button>
+        <p class="toggle-text">
+          <span id="toggleText">Don't have an account?</span>
+          <a href="{% url 'register' %}" id="toggleBtn">Register</a>
+        </p>
+   
+</form>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

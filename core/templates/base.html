@@ -1,0 +1,40 @@
+<!-- templates/base.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataLab | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v-125">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">DataLab.</div>
+            <div class="bar" ></div>
+            <ul class="nav-links">
+
+                <li><a href="{% url 'upload' %}">Upload</a></li>
+                <li><a href="{% url 'preview' %}">Preview</a></li>
+                <li><a href="{% url 'analyze' %}">Analyze</a></li>
+                <li><a href="{% url 'visualizer' %}">Visualize</a></li> 
+                <li><a href="{% url 'clean' %}">Clean</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 DataLab | Made by Aniket</p>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

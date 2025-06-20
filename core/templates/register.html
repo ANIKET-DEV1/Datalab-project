@@ -1,0 +1,47 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataLab | {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v-126">
+</head>
+<body>
+    <h2 class="upload-h2-2">DataLab.</h2>
+    <h2 class="upload-h2">Welcome to Aniket creation!</h2>
+<form method="POST" class="login-form">
+    {% csrf_token %}
+    <h2 class="upload-h2-2">Resgister</h2>
+    <div class="line"></div>
+
+        <div class="input-group">
+          <label for="Username">Username:</label>
+          <input type="text"  name="username" required >
+        </div>
+        
+       <div class="input-group">
+          <label for="password">Password:</label>
+          <input type="password" name="password" required >
+        </div>
+
+        <div class="input-group">
+          <label for="password">Confirm Password:</label>
+          <input type="password" id="password" name="con_password"required >
+        </div>
+        {% if messages %}
+        {% for m in messages %}
+        <p id="error">{{m}}</p>
+        {% endfor %}
+        {% endif %}
+        <button type="submit" class="btn">Register</button>
+        <p class="toggle-text">
+          <span id="toggleText">Already have an account?</span>
+          <a href="{% url 'login'%}" id="toggleBtn">Login</a>
+        </p>
+   
+</form>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

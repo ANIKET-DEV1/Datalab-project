@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Clean{% endblock %}
+{% block content %}
+<h4 class="stats-h4">Shape:</h4><p>{{ Missed.shape.0 }} rows × {{ Missed.shape.1 }} columns</p>
+
+<h4 class="stats-h4">Missing:</h4>
+  <ul>
+    {%for key,value in Missed.missing.items %}
+    {% if value > 0 %}
+      <li class="stats-li">{{key|safe}} : {{value}}</li>
+    {%endif%}
+    {% endfor %}
+  </ul>
+<h4 class="stats-h4">Total missing: {{ Missed.total_missing}}<h4>
+{% comment %} Here we go {% endcomment %}
+<form method="post" class="clean-form">
+  {% csrf_token %}
+    <h2 class="upload-h2-2">DataClean</h2>
+    <div class=line></div>
+  <label class="clean-l">
+    <input type="checkbox" name="remove_nulls">
+    Remove rows with NULL values
+  </label><br>
+
+  <label class="clean-l">
+    <input type="checkbox" name="remove_duplicates">
+    Remove duplicate rows
+  </label><br>
+
+  <label class="clean-l">
+    Fill missing values with:
+    <input type="text" name="fillna_value" placeholder="e.g. 0 or Unknown">
+  </label><br>
+
+  <label class="clean-l">
+    Drop columns (comma-separated):
+    <input type="text" name="drop_columns" placeholder="e.g. id,email">
+  </label><br>
+
+  <label class="clean-l">
+    Rename columns (use ',' to separated diffrent coloum):
+    <input type="text" name="rename_columns" placeholder="e.g. Old name : new name">
+  </label><br>
+
+<button type="submit">Clean Data</button>
+<a href="{% url 'export' %}" class="Download" target="_blank">Download</a>
+</form>
+{%if messages%}
+{%for m in messages%}
+<p class="message">{{m}}</p>
+{%endfor%}
+{%endif%}
+
+{% if cleaned_table %}
+<h4 class="upload-h2">Cleaned data</h2>
+<h4 class="preview-h4">-20 rows-<h4>
+    <div class="table-container">
+        {{ cleaned_table|safe }}
+    </div>
+{% else %}
+    <p>No data available to preview. Please <a href="{% url 'upload' %}">upload a CSV</a>.</p>
+{% endif %}
+{%endblock%}
