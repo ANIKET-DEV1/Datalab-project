@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-g6-4b1gdrde=8gi61=2mlbz1q=&x1ulwdlhn6=7y@$oac$(wt_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['Datalab.onrender.com'] 
+ALLOWED_HOSTS = ['datalab-efsb.onrender.com'] 
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
@@ -33,7 +33,7 @@ SESSION_COOKIE_AGE = 1209600  # 2 weeks
 SESSION_SAVE_EVERY_REQUEST = False
 SESSION_COOKIE_SECURE = True 
 CSRF_COOKIE_SECURE = True 
-CSRF_TRUSTED_ORIGINS = ['https://Datalab.onrender.com']
+CSRF_TRUSTED_ORIGINS = ['https://datalab-efsb.onrender.com']
 SESSION_COOKIE_SAMESITE = 'Lax'
 # Application definition
 
